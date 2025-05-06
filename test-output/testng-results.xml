@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-05-05T18:02:19 CDT" name="Default suite" finished-at="2025-05-05T18:02:19 CDT" duration-ms="91">
+    <groups>
+      <group name="unit">
+        <method signature="SqlExprEvaluatorTest.evalTest1()[pri:0, instance:net.magneticpotato.sqlexpr.congocc.SqlExprEvaluatorTest@1ea9f6af]" name="evalTest1" class="net.magneticpotato.sqlexpr.congocc.SqlExprEvaluatorTest"/>
+      </group> <!-- unit -->
+    </groups>
+    <test started-at="2025-05-05T18:02:19 CDT" name="Default test" finished-at="2025-05-05T18:02:19 CDT" duration-ms="91">
+      <class name="net.magneticpotato.sqlexpr.congocc.SqlExprEvaluatorTest">
+        <test-method signature="evalTest1()[pri:0, instance:net.magneticpotato.sqlexpr.congocc.SqlExprEvaluatorTest@1ea9f6af]" started-at="2025-05-05T18:02:19 CDT" name="evalTest1" finished-at="2025-05-05T18:02:19 CDT" duration-ms="61" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- evalTest1 -->
+      </class> <!-- net.magneticpotato.sqlexpr.congocc.SqlExprEvaluatorTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

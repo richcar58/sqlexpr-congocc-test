@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.magneticpotato</groupId>
+    <artifactId>sqlexpr-congocc-test</artifactId>
+    <version>1.0.0</version>
+  
+    <name>SQL expression tester</name>
+    <description>Test code for CongoCC generated parser</description>
+  
+    <properties>
+        <!-- Java version -->
+        <java-source.version>1.21</java-source.version>
+        <java-target.version>1.21</java-target.version>
+
+        <!-- Maven compiler plugin Java release support -->
+        <maven-compiler-plugin-release>21</maven-compiler-plugin-release>
+
+        <!--  Default to no release to suppress signing etc      -->
+        <skip.signing>true</skip.signing>
+        
+        <!-- Source encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- Capture the UTC build time for filtering use in children poms -->
+        <!-- There's some goofy behavior that prevent the direct use of    -->
+        <!-- maven property, so we format and reassign it.                 -->
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.magneticpotato</groupId>
+            <artifactId>sqlexpr-congocc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <!-- There are only test dependencies on testng -->
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+  
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+
+        <plugins>
+            <!-- Capture the git commit hash and branch identifiers. -->
+            <!-- See parent pom for configuration details. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            
+            <!-- Compile the builder program that calls the parser generator -->    
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                     <configuration>
+                        <!-- The release tells maven what version of -->
+                        <!-- the Java compiler to use internally. -->
+                        <release>${maven-compiler-plugin-release}</release>
+                        <source>${java-source.version}</source>
+                        <target>${java-target.version}</target>
+                    </configuration>
+                <executions>
+                    <execution>
+                        <id>compile-generator</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>net/magneticpotato/sqlexpr/congocc/generator/*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>net/magneticpotato/sqlexpr/congocc</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
+     
+            <plugin>
+                <!-- SKIPPING all tests -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+        </plugins> 
+    </build>
+</project>
